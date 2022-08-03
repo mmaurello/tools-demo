@@ -1,5 +1,4 @@
 import React from "react";
-import { Profile } from "../components/Dashboard/Profile";
 import { Shell } from "../components/Shell";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { List } from "../components/XCM/List";
