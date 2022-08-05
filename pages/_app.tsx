@@ -55,6 +55,16 @@ const App = (props: AppProps) => {
                   },
                 }),
               },
+              ActionIcon: {
+                styles: (theme) => ({
+                  root: {
+                    color:
+                      theme.colorScheme === "dark"
+                        ? theme.colors[theme.primaryColor][5]
+                        : theme.colors[theme.primaryColor][7],
+                  },
+                }),
+              },
             },
           }}
         >
