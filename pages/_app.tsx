@@ -9,6 +9,8 @@ import { useEffect, useState } from "react";
 import { appWithTranslation } from "next-i18next";
 import { useLocalStorage } from "@mantine/hooks";
 import { NotificationsProvider } from "@mantine/notifications";
+import flagsmith from "flagsmith";
+import { FlagsmithProvider } from "flagsmith/react";
 
 const App = (props: AppProps) => {
   const [brandColor, setBrandColor] = useState<string>();
@@ -33,46 +35,52 @@ const App = (props: AppProps) => {
           content="minimum-scale=1, initial-scale=1, width=device-width"
         />
       </Head>
-
-      <ColorSchemeProvider
-        colorScheme={colorScheme}
-        toggleColorScheme={toggleColorScheme}
+      <FlagsmithProvider
+        options={{
+          environmentID: "CAaMY7LCrHWeJsBQeLpUzE",
+        }}
+        flagsmith={flagsmith}
       >
-        <MantineProvider
-          withGlobalStyles
-          withNormalizeCSS
-          theme={{
-            colorScheme,
-            primaryColor: brandColor,
-            components: {
-              ThemeIcon: {
-                styles: (theme) => ({
-                  root: {
-                    color:
-                      theme.colorScheme === "dark"
-                        ? theme.colors[theme.primaryColor][3]
-                        : theme.colors[theme.primaryColor][9],
-                  },
-                }),
-              },
-              ActionIcon: {
-                styles: (theme) => ({
-                  root: {
-                    color:
-                      theme.colorScheme === "dark"
-                        ? theme.colors[theme.primaryColor][5]
-                        : theme.colors[theme.primaryColor][7],
-                  },
-                }),
-              },
-            },
-          }}
+        <ColorSchemeProvider
+          colorScheme={colorScheme}
+          toggleColorScheme={toggleColorScheme}
         >
-          <NotificationsProvider>
-            <Component {...pageProps} />
-          </NotificationsProvider>
-        </MantineProvider>
-      </ColorSchemeProvider>
+          <MantineProvider
+            withGlobalStyles
+            withNormalizeCSS
+            theme={{
+              colorScheme,
+              primaryColor: brandColor,
+              components: {
+                ThemeIcon: {
+                  styles: (theme) => ({
+                    root: {
+                      color:
+                        theme.colorScheme === "dark"
+                          ? theme.colors[theme.primaryColor][3]
+                          : theme.colors[theme.primaryColor][9],
+                    },
+                  }),
+                },
+                ActionIcon: {
+                  styles: (theme) => ({
+                    root: {
+                      color:
+                        theme.colorScheme === "dark"
+                          ? theme.colors[theme.primaryColor][5]
+                          : theme.colors[theme.primaryColor][7],
+                    },
+                  }),
+                },
+              },
+            }}
+          >
+            <NotificationsProvider>
+              <Component {...pageProps} />
+            </NotificationsProvider>
+          </MantineProvider>
+        </ColorSchemeProvider>
+      </FlagsmithProvider>
     </>
   );
 };
