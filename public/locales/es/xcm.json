@@ -1,4 +1,8 @@
 {
+  "assetId": "Id de Activo",
+  "assetName": "Nombre de Activo",
+  "symbol": "Símbolo",
+  "actions": "Acciones",
   "deposit": "Depositar",
   "withdraw": "Retirar"
 }

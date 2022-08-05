@@ -1,4 +1,8 @@
 {
+  "assetId": "Asset id",
+  "assetName": "Asset name",
+  "symbol": "Symbol",
+  "actions": "Actions",
   "deposit": "Deposit",
   "withdraw": "Withdraw"
 }

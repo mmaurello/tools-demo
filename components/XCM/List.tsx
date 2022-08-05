@@ -12,36 +12,39 @@ const assets = [
 
 export const List = () => {
   const { t } = useTranslation("xcm");
-  const rows = assets.map((asset) => (
-    <tr key={asset.name}>
-      <td>{asset.id}</td>
-      <td>{asset.name}</td>
-      <td>{asset.symbol}</td>
-      <td>
-        <Group>
-          <Tooltip label={t("deposit")}>
-            <ActionIcon>
-              <IconStepInto />
-            </ActionIcon>
-          </Tooltip>
-          <Tooltip label={t("withdraw")}>
-            <ActionIcon>
-              <IconStepOut />
-            </ActionIcon>
-          </Tooltip>
-        </Group>
-      </td>
-    </tr>
-  ));
+
+  const rows = assets.map((asset) => {
+    return (
+      <tr key={asset.name}>
+        <td>{asset.id}</td>
+        <td>{asset.name}</td>
+        <td>{asset.symbol}</td>
+        <td>
+          <Group>
+            <Tooltip label={t("deposit")}>
+              <ActionIcon>
+                <IconStepInto />
+              </ActionIcon>
+            </Tooltip>
+            <Tooltip label={t("withdraw")}>
+              <ActionIcon>
+                <IconStepOut />
+              </ActionIcon>
+            </Tooltip>
+          </Group>
+        </td>
+      </tr>
+    );
+  });
 
   return (
     <Table highlightOnHover verticalSpacing="lg">
       <thead>
         <tr>
-          <th>Asset id</th>
-          <th>Asset name</th>
-          <th>Symbol</th>
-          <th>Actions</th>
+          <th>{t("assetID")}</th>
+          <th>{t("assetName")}</th>
+          <th>{t("symbol")}</th>
+          <th>{t("actions")}</th>
         </tr>
       </thead>
       <tbody>{rows}</tbody>
