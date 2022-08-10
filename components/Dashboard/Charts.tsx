@@ -32,7 +32,6 @@ export function Charts() {
       },
     ],
   };
-  console.log("theme", theme);
 
   const dataLine = {
     labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
