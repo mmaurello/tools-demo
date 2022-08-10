@@ -1,7 +1,7 @@
 import { ActionIcon, Group, Table, Text, Tooltip } from "@mantine/core";
 import { IconStepInto, IconStepOut } from "@tabler/icons";
 import { useTranslation } from "next-i18next";
-import { useFlags, useFlagsmith } from "flagsmith/react";
+import { useFlags } from "flagsmith/react";
 
 const assets = [
   { id: 6, symbol: "KMA", name: "Calamari", flag: "kma_disabled" },
