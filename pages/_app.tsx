@@ -4,6 +4,7 @@ import {
   ColorSchemeProvider,
   MantineProvider,
   ColorScheme,
+  BackgroundImage,
 } from "@mantine/core";
 import { useEffect, useState } from "react";
 import { appWithTranslation } from "next-i18next";
@@ -12,18 +13,28 @@ import { NotificationsProvider } from "@mantine/notifications";
 
 const App = (props: AppProps) => {
   const [brandColor, setBrandColor] = useState<string>();
+  const [colorScheme, setColorScheme] = useState<ColorScheme>("dark");
   const [colorTheme] = useLocalStorage<string>({
     key: "color-theme",
     defaultValue: "red",
   });
-  const [colorScheme, setColorScheme] = useState<ColorScheme>("light");
+  const [background, setBackground] = useState<string>();
+
+  useEffect(() => {
+    setBrandColor(colorTheme);
+    setBackground(
+      colorTheme == "yellow"
+        ? "/images/BG-moonriver.png"
+        : colorTheme == "blue"
+        ? "/images/BG-moonbeam.png"
+        : "/images/BG-moonbase.png"
+    );
+  }, [colorTheme]);
+
   const toggleColorScheme = (value?: ColorScheme) =>
     setColorScheme(value || (colorScheme === "dark" ? "light" : "dark"));
 
-  useEffect(() => setBrandColor(colorTheme), [colorTheme]);
-
   const { Component, pageProps } = props;
-
   return (
     <>
       <Head>
@@ -69,7 +80,9 @@ const App = (props: AppProps) => {
           }}
         >
           <NotificationsProvider>
-            <Component {...pageProps} />
+            <BackgroundImage src={background || ""}>
+              <Component {...pageProps} />
+            </BackgroundImage>
           </NotificationsProvider>
         </MantineProvider>
       </ColorSchemeProvider>

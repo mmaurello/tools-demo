@@ -31,14 +31,6 @@ export function Shell({ children }: { children: ReactNode }) {
 
   return (
     <AppShell
-      styles={{
-        main: {
-          background:
-            theme.colorScheme === "dark"
-              ? theme.colors.dark[8]
-              : theme.colors.gray[0],
-        },
-      }}
       zIndex={0}
       padding="md"
       navbar={
@@ -48,6 +40,9 @@ export function Shell({ children }: { children: ReactNode }) {
           p="md"
           hiddenBreakpoint="sm"
           hidden={!opened}
+          style={{
+            backgroundColor: "transparent",
+          }}
         >
           <Navbar.Section grow mt="xs">
             <MainLinks />
@@ -55,7 +50,12 @@ export function Shell({ children }: { children: ReactNode }) {
         </Navbar>
       }
       header={
-        <Header height={60}>
+        <Header
+          height={60}
+          style={{
+            backgroundColor: "transparent",
+          }}
+        >
           <Group sx={{ height: "100%" }} px={20} position="apart">
             <Group>
               <MediaQuery largerThan="sm" styles={{ display: "none" }}>
