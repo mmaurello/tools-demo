@@ -49,7 +49,7 @@ function MainLink({ icon, label, route }: MainLinkProps) {
 
 const data = [
   { icon: <IconDashboard size={16} />, label: "dashboard", route: "/" },
-  { icon: <IconCrown size={16} />, label: "staking" },
+  { icon: <IconCrown size={16} />, label: "staking", route: "/staking" },
   { icon: <IconCurrencyCent size={16} />, label: "xcm", route: "/xcm" },
   { icon: <IconBook size={16} />, label: "resources" },
   {
