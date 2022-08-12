@@ -1,3 +1,4 @@
+import { GetServerSidePropsContext } from "next";
 import { AppProps } from "next/app";
 import Head from "next/head";
 import {
@@ -6,6 +7,7 @@ import {
   ColorScheme,
   BackgroundImage,
 } from "@mantine/core";
+import { getCookie, setCookie } from "cookies-next";
 import { useEffect, useState } from "react";
 import { appWithTranslation } from "next-i18next";
 import { useLocalStorage } from "@mantine/hooks";
@@ -13,9 +15,11 @@ import { NotificationsProvider } from "@mantine/notifications";
 import flagsmith from "flagsmith";
 import { FlagsmithProvider } from "flagsmith/react";
 
-const App = (props: AppProps) => {
+const App = (props: AppProps & { colorScheme: ColorScheme }) => {
   const [brandColor, setBrandColor] = useState<string>();
-  const [colorScheme, setColorScheme] = useState<ColorScheme>("dark");
+  const [colorScheme, setColorScheme] = useState<ColorScheme>(
+    props.colorScheme
+  );
   const [colorTheme] = useLocalStorage<string>({
     key: "color-theme",
     defaultValue: "red",
@@ -33,8 +37,14 @@ const App = (props: AppProps) => {
     );
   }, [colorTheme]);
 
-  const toggleColorScheme = (value?: ColorScheme) =>
-    setColorScheme(value || (colorScheme === "dark" ? "light" : "dark"));
+  const toggleColorScheme = (value?: ColorScheme) => {
+    const nextColorScheme =
+      value || (colorScheme === "dark" ? "light" : "dark");
+    setColorScheme(nextColorScheme);
+    setCookie("mantine-color-scheme", nextColorScheme, {
+      maxAge: 60 * 60 * 24 * 30,
+    });
+  };
 
   const { Component, pageProps } = props;
   return (
@@ -97,5 +107,9 @@ const App = (props: AppProps) => {
     </>
   );
 };
+
+App.getInitialProps = ({ ctx }: { ctx: GetServerSidePropsContext }) => ({
+  colorScheme: getCookie("mantine-color-scheme", ctx) || "dark",
+});
 
 export default appWithTranslation(App);

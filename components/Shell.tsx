@@ -41,7 +41,10 @@ export function Shell({ children }: { children: ReactNode }) {
           hiddenBreakpoint="sm"
           hidden={!opened}
           style={{
-            backgroundColor: "transparent",
+            backgroundColor:
+              colorScheme == "dark"
+                ? "rgba(0,0,0, 0.2)"
+                : "rgba(255,255,255,0.2)",
           }}
         >
           <Navbar.Section grow mt="xs">
@@ -53,7 +56,10 @@ export function Shell({ children }: { children: ReactNode }) {
         <Header
           height={60}
           style={{
-            backgroundColor: "transparent",
+            backgroundColor:
+              colorScheme == "dark"
+                ? "rgba(0,0,0,0.2)"
+                : "rgba(255,255,255,0.2)",
           }}
         >
           <Group sx={{ height: "100%" }} px={20} position="apart">
