@@ -1,20 +1,12 @@
 import React from "react";
 import "chart.js/auto";
 import { Doughnut, Line } from "react-chartjs-2";
-import {
-  BackgroundImage,
-  Box,
-  Center,
-  Container,
-  Group,
-  Text,
-  useMantineTheme,
-} from "@mantine/core";
+import { Box, Container, Group, useMantineTheme } from "@mantine/core";
 
 export function Charts() {
   const theme = useMantineTheme();
   const data = {
-    labels: ["I", "II", "III"],
+    labels: ["Free", "Reserved", "Locked"],
     datasets: [
       {
         data: [700, 500, 500],
@@ -28,9 +20,26 @@ export function Charts() {
           theme.colors[theme.primaryColor][6],
           theme.colors[theme.primaryColor][9],
         ],
-        borderWidth: 1,
+        borderWidth: 0,
       },
     ],
+  };
+  const options = {
+    cutout: 60,
+    plugins: {
+      legend: {
+        position: "right",
+        labels: {
+          usePointStyle: true,
+          padding: 30,
+          color: "white",
+          font: {
+            padding: 4,
+            size: 15,
+          },
+        },
+      },
+    },
   };
 
   const dataLine = {
@@ -38,20 +47,36 @@ export function Charts() {
     datasets: [
       {
         label: "Staking rewards",
-        data: [33, 53, 85, 41, 44, 65],
+        data: [33, 53, 68, 41, 44, 65],
         fill: true,
-        backgroundColor: "rgba(75,192,192,0.2)",
+        backgroundColor: theme.colors[theme.primaryColor][8] + "33",
         borderColor: theme.primaryColor,
       },
     ],
   };
+
+  const optionsLine = {
+    tension: 0.2,
+    scales: {
+      x: {
+        grid: {
+          display: false,
+        },
+      },
+    },
+    plugins: {
+      legend: {
+        display: false,
+      },
+    },
+  };
   return (
     <Group>
       <Container>
-        <Doughnut data={data} />
+        <Doughnut data={data} options={options} />
       </Container>
       <Container>
-        <Line data={dataLine} />
+        <Line data={dataLine} options={optionsLine} />
       </Container>
       <Box sx={{ maxWidth: 300 }} mx="auto"></Box>
     </Group>
