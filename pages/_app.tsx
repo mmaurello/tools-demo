@@ -6,12 +6,16 @@ import {
   MantineProvider,
   ColorScheme,
   BackgroundImage,
+  createEmotionCache,
 } from "@mantine/core";
 import { getCookie, setCookie } from "cookies-next";
 import { useEffect, useState } from "react";
 import { appWithTranslation } from "next-i18next";
 import { useLocalStorage } from "@mantine/hooks";
 import { NotificationsProvider } from "@mantine/notifications";
+import { rtlCache } from "../rtl-cache";
+
+const myCache = createEmotionCache({ key: "mantine" });
 
 const App = (props: AppProps & { colorScheme: ColorScheme }) => {
   const [brandColor, setBrandColor] = useState<string>();
@@ -60,6 +64,7 @@ const App = (props: AppProps & { colorScheme: ColorScheme }) => {
         toggleColorScheme={toggleColorScheme}
       >
         <MantineProvider
+          emotionCache={rtlCache}
           withGlobalStyles
           withNormalizeCSS
           theme={{
