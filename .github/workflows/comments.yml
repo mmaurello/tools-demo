@@ -1,15 +1,19 @@
-name: trigger on comment 
+name: Comment Trigger
 
-on: issue_comment
+on:
+  issue_comment:
+    types:
+      - created
 
 jobs:
-  pr_commented:
-    # This job only runs for pull request comments
-    name: PR comment
-    if: ${{ github.event.issue.pull_request }}
+  trigger_on_comment:
     runs-on: ubuntu-latest
+
     steps:
-      - run: |
-          echo A comment on PR $NUMBER
-        env:
-          NUMBER: ${{ github.event.issue.number }}
+    - name: Check out repository
+      uses: actions/checkout@v2
+
+    - name: Run on comment
+      run: |
+        echo "Pull Request comment detected!"
+        # Add your custom actions or commands here
