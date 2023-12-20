@@ -7,7 +7,7 @@ jobs:
       runs-on: ubuntu-latest
       steps:
         - name: Run Dastardly Action Step
-          continue-on-error: true                        # This allows subsequent steps to run even if this step fails
+        #   continue-on-error: true                        # This allows subsequent steps to run even if this step fails
           uses: PortSwigger/dastardly-github-action@main
           with:
             target-url: 'https://www.blank.org/'
