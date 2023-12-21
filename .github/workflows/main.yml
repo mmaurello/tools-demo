@@ -12,4 +12,5 @@ jobs:
       - uses: mshick/add-pr-comment@v2
         with:
           message: |
-            **Hello MAIN**
+            **❗❗this pull request is a release to `main`** 
+            Make sure you DON'T SQUASH AND MERGE
