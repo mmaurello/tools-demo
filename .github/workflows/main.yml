@@ -1,0 +1,16 @@
+on:
+  pull_request:
+    branches:
+      - main
+  
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    steps:
+      - uses: mshick/add-pr-comment@v2
+        with:
+          message: |
+            **❗❗this pull request is a release to `main`** 
+            Make sure you DON'T SQUASH AND MERGE
