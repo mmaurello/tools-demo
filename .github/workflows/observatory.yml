@@ -14,10 +14,7 @@ jobs:
         uses: simonireilly/observatory-github-action@v0.1.3
         id: observatory
         with:
-        #   web_host: https://develop.d2uu0q68cc363g.amplifyapp.com
           web_host: ${{ vars.MOONBEAN_DAPP_SANDBOX_URL }}
-      - name: Dump runner context
-        run: echo this is the url "${{ vars.MOONBEAN_DAPP_SANDBOX_URL }}"
 
       - name: Create commit comment
         uses: peter-evans/commit-comment@v1
