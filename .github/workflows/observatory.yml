@@ -1,0 +1,22 @@
+name: Mozilla Observatory
+on:
+  pull_request:
+    branches: 
+        - main
+
+jobs:
+  static-url:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Test Observatory
+        uses: simonireilly/observatory-github-action@v0.1.3
+        id: observatory
+        with:
+          web_host: https://develop.d2uu0q68cc363g.amplifyapp.com
+
+      - name: Create commit comment
+        uses: peter-evans/commit-comment@v1
+        with:
+          body: "# PR ${{ steps.observatory.outputs.observatory-report }}"
