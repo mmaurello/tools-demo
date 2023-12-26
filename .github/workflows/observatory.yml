@@ -14,7 +14,7 @@ jobs:
         uses: simonireilly/observatory-github-action@v0.1.3
         id: observatory
         with:
-          web_host: ${{ vars.MOONBEAN_DAPP_SANDBOX_URL }}
+          web_host: ${{ secrets.SANDBOX_URL }}
 
       - name: Create commit comment
         uses: peter-evans/commit-comment@v1
