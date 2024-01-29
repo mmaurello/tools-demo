@@ -28,7 +28,7 @@ export function Charts() {
     cutout: 60,
     plugins: {
       legend: {
-        position: "right",
+        position: "right" as "right",
         labels: {
           usePointStyle: true,
           padding: 30,
