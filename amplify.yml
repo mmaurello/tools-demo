@@ -1,0 +1,20 @@
+version: 1
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - npm i -g npm@9
+        - npm ci
+    build:
+      commands:
+        # this is needed to have env variables available at the dApp backend https://docs.aws.amazon.com/amplify/latest/userguide/ssr-environment-variables.html
+        - env | grep -e DYNAMO_DB_ >> .env.production
+        - env | grep -e NEXT_PUBLIC_ >> .env.production
+        - npm run build
+  artifacts:
+    baseDirectory: .next
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - node_modules/**/*
